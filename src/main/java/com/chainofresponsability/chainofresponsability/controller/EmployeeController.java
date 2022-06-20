@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,6 +28,11 @@ public class EmployeeController {
         Optional<Employee> possibleEmployee = employeeRepository.findById(employeeId);
 
         return possibleEmployee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping
+    public List<Employee> search() {
+        return employeeRepository.findAll();
     }
 
     @DeleteMapping("/{employeeId}")
